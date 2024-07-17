@@ -2,12 +2,14 @@ import streamlit as st
 
 
 def calculate_weighted_score(odds, last_five_games):
-    # Ponderisanje rezultata utakmica, gde je najnovija utakmica najvažnija
-    weights = [5, 4, 3, 2, 1]
-    score = sum([weights[i] * (0.40 if result == 'W' else 0.25 if result == 'D' else 0) for i, result in
+    # Smanjujemo ponderisanje rezultata utakmica
+    weights = [3, 2.5, 2, 1.5, 1]
+    score = sum([weights[i] * (1 if result == 'W' else 0.50 if result == 'D' else -0.10) for i, result in
                  enumerate(last_five_games)])
-    # Uzimamo u obzir i kvotu, gde manja kvota dobija veći skor
-    weighted_score = score / odds
+    # Uzimamo u obzir i kvotu, gde manja kvota dobija veći skor, ali smanjujemo uticaj rezultata
+    weighted_score = (score / odds) * 0.4 + (1 / odds) * 0.6
+    print(f"koeficijent na osnovu zadnjih 5 utakmica je {score}")
+    print(f"ukupni koeficijent na osnovu utakmica/kvota je {weighted_score}")
     return weighted_score
 
 
@@ -49,6 +51,8 @@ def main():
     if st.button("Izračunaj"):
         # Izračunavanje ponderisanih skorova
         score_1 = calculate_weighted_score(odds_1, last_five_team1)
+        # Prednost domaceg terena
+        score_1 += 0.15
         score_2 = calculate_weighted_score(odds_2, last_five_team2)
         # Izračunavanje skorova za opciju X
         relative_odds_diff = abs(odds_1 - odds_2) / min(odds_1, odds_2)
