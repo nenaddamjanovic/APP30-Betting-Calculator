@@ -59,11 +59,22 @@ def main():
         total_goals_team1 = sum(goals_team1)
         total_goals_team2 = sum(goals_team2)
 
-        hint = ""
-        if total_goals_team1 > 10:
-            hint = f"U zadnjih pet utakmica Tim 1 je postigao {total_goals_team1} golova, razmislite da igrate i golove na tiketu"
-        elif total_goals_team2 > 10:
-            hint = f"U zadnjih pet utakmica Tim 2 je postigao {total_goals_team2} golova, razmislite da igrate i golove na tiketu"
+        hint1 = ""
+        hint2 = ""
+        if total_goals_team1 > 11:
+            hint1 = f"U zadnjih pet utakmica Tim 1 je postigao {total_goals_team1} golova, razmislite da igrate i na dosta golova"
+        elif total_goals_team1 < 5:
+            hint1 = f"U zadnjih pet utakmica Tim 1 je postigao {total_goals_team1} gola, razmislite da igrate na malo golova"
+        else:
+            hint1 = "Ekipa 1 igra normalno bez isticaja povodom broja golova"
+
+        if total_goals_team2 > 11:
+            hint2 = f"U zadnjih pet utakmica Tim 2 je postigao {total_goals_team2} golova, razmislite da igrate i na dosta golova"
+        elif total_goals_team2 < 5:
+            hint2 = f"U zadnjih pet utakmica Tim 2 je postigao {total_goals_team2} gola, razmislite da igrate na malo golova"
+        else:
+            hint2 = "Ekipa 2 igra normalno bez isticaja povodom broja golova"
+
 
 
 
@@ -73,7 +84,7 @@ def main():
         st.write(
             f"Izračunati koeficijenti su:\nZa Pobedu 1: {score_1:.3f}, za Nerešeno: {score_X:.3f}, za Pobedu 2: {score_2:.3f}")
         st.write(f'Zato je najbolja opcija za igrati: {best_option}')
-        st.write(f'\nNapomena: {hint}')
+        st.write(f'Napomena: \n{hint1}\n{hint2}')
 
 
 if __name__ == "__main__":
