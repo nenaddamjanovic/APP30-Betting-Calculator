@@ -84,7 +84,8 @@ def main():
         st.write(
             f"Izračunati koeficijenti su:\nZa Pobedu 1: {score_1:.3f}, za Nerešeno: {score_X:.3f}, za Pobedu 2: {score_2:.3f}")
         st.write(f'Zato je najbolja opcija za igrati: {best_option}')
-        st.write(f'Napomena: \n{hint1}\n{hint2}')
+        st.write(f'Napomena: {hint1}')
+        st.write(f'Napomena: {hint2}')
 
 
 if __name__ == "__main__":
